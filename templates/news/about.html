@@ -1,0 +1,21 @@
+{% extends 'news/base.html' %}
+{% load staticfiles %}
+{% block body %}
+<div class="page-header">
+{% if last_visit_time %}
+最近访问时间: {{last_visit_time}}
+{% else %}
+你最近并没有访问
+{% endif %}
+</div>
+<div class="page-header">
+<address>
+  <strong>作者：derekning</strong><br>
+  请联系我：nzw1992@gmail.com<br>
+</address>
+
+
+</div>
+
+<img src="{% static "images/Kojiharu.png" %}" class="" alt="Responsive image" style="width: 383px; height: 575px;"/>
+{% endblock %}

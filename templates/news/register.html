@@ -1,0 +1,31 @@
+{% extends 'news/base.html' %}
+
+{% block body %}
+        {% if registered %}
+        <strong>注册成功，请点击右边链接或者右上角进行登录</strong>
+        <a href="{% url 'login' %}">登录</a>
+        {% else %}
+
+        <form id="user_form" method="post" action=""
+                enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ user_form.username.errors }}
+                <label>用户名：</label>
+                {{ user_form.username }}
+                <p class="help-block">150个字符以内，只支持英文字母，数字，以及@/./+/-/</p>
+            </div>
+            <div class="form-group">
+                {{ user_form.email.errors }}
+                <label>邮箱：</label>
+                {{ user_form.email }}
+            </div>
+            <div class="form-group">
+                {{ user_form.password.errors }}
+                <label>密码：</label>
+                {{ user_form.password }}
+            </div>
+            <input type="submit" name="submit" value="注册" />
+        </form>
+        {% endif %}
+{% endblock %}

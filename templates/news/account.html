@@ -1,0 +1,30 @@
+{% extends 'news/base.html' %}
+
+{% block body %}
+    <row>
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <label>用户名： {{account.user.username}}</label>
+          </div>
+          <div class="form-group">
+            <label>积分： {{account.karma}}</label>
+          </div>
+          <div class="form-group">
+            {% if 'This field is required.' in form.email.errors%}
+                <label>不能为空！</label></br>
+            {% else %}
+            {{ form.email.errors }}
+            {% endif %}
+            <label for="email">邮箱:</label>
+            <input type="email" class="form-control" id="inputEmail"  name="email" placeholder={{account.user.email}}>
+          </div>
+          <button type="submit" class="btn btn-default" id="update_email">保存邮箱更新</button>
+        </form>
+    </row>
+    <br />
+    <row>
+        <a href="{% url 'change_password' %}">修改密码</a>
+    </row>
+
+{% endblock %}

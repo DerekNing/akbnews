@@ -1,0 +1,31 @@
+
+{% extends 'news/base.html' %}
+
+
+{% block title %}add_link{% endblock %}
+{% block add_link %}{% endblock %}
+
+{% block body %}
+
+<form id="link_form" method="post" action="/news/add_link/">
+
+    {% csrf_token %}
+
+    <div class="form-group">
+        {{ form.url.errors }}
+        <label>链接地址：</label>
+        <input type="" class="form-control" id="" name="url" placeholder="请输入完整的URL地址，包括HTTP:或者HTTPS:">
+    </div>
+    <div class="form-group">
+        {{ form.title.errors }}
+        <label>标题：</label>
+        <input type="" class="form-control" id="" name="title" placeholder="">
+    </div>
+
+    <input type="submit" name="submit" value="创建新链接" />
+
+</form>
+{% endblock %}
+
+{% block add %}
+{% endblock %}

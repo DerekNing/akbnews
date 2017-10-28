@@ -1,0 +1,6 @@
+[client]
+database = akbnews
+host = localhost
+user = root
+password = 19920829
+default-character-set = utf8

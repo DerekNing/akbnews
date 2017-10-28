@@ -1,0 +1,72 @@
+{% extends 'news/base.html' %}
+{% load i18n %}
+
+{% block body %}
+    <div class="links_part">
+    {% if links %}
+        <div class="row links">
+            <ul class="list-group">
+            {% for link in links %}
+                <li class="list-group-item">
+                    <small id="score{{link.id}}">{{ link.score }}</small> 赞
+                    {% if not voted_links or link not in voted_links%}
+                    <button id="up{{link.id}}" linkid="{{link.id}}" class="btn btn-link link_up" type="button">
+                        <span class="glyphicon glyphicon-arrow-up"></span>
+                    </button>
+                    {% else %}
+                        <small>已赞</small>
+                    {% endif %}
+                    <a href="{% url 'goto' %}?link_id={{link.id}}">{{link.title}}</a>
+                    <small>{{link.view}}次访问</small> |
+                    <small>hot指数：{{link.hot|floatformat:3}}</small> |
+                    <small>由{{link.creator.user.username}}创建于：{{ link.post_time|date:"SHORT_DATE_FORMAT" }} {{ link.post_time|time:"H:i" }} | {{link.post_time|timesince }} </small>
+                    
+                </li>
+            {% endfor %}
+            </ul>
+        </div><!-- links -->
+
+        <div class="row">
+            <nav aria-label="...">
+                <ul class="pagination">
+                {% if links.has_previous %}
+                    <li>
+                        <a href="?page={{ links.previous_page_number }}">
+                            前一页
+                        </a>
+                    </li>
+                {% endif %}
+                <li class="active">
+                    <a href="?page={{links.number}}">
+                        第 {{ links.number }} / {{ links.paginator.num_pages }} 页
+                    </a>
+                </li>
+                {% if links.has_next %}
+                    <li>
+                    <a href="?page={{ links.next_page_number }}">
+                        下一页
+                    </a>
+                    </li>
+                {% endif %}
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">跳至</span>
+                    <input id="page_jump_index" type="text"  class="form-control">
+                    <span class="input-group-btn">
+                        <button id="page_jump_button"  class="btn btn-default" type="button">页</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        还没有链接
+    {% endif %}
+    </div><!--links_part-->
+    <br />
+    {% if visits %}
+    <p>你的访问次数: {{ visits }}</p>
+    {% endif %}
+{% endblock %}
